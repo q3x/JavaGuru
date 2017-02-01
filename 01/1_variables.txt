@@ -1,0 +1,26 @@
+Задание 1: Названия переменных
+
+shipsInHarbor
+intCounter
+firstNumber
+answer
+randomNumber
+randomNumGenerator
+carColor
+carSpeed
+userInputNumber
+largestNumber
+smallestNumber
+leftRangeOfNumbers
+rightRangeOfNumbers
+possibleAnswer
+bankAccount
+moneyInBankAccount
+bankCard
+bikeWheelsNum
+
+
+
+
+
+

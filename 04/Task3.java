@@ -10,9 +10,9 @@ public class Task3 {
 	    
 	    Scanner scanner = new Scanner(System.in);
 
-	    boolean isMatch = true;
+	    boolean isMatch = false;
 
-	    while (isMatch) {
+	    while (isMatch == false) {
 		    System.out.print("Please, enter number: ");
 	        int userNumber = scanner.nextInt();
 
@@ -22,7 +22,7 @@ public class Task3 {
 	        	System.out.println("Your number is larger then app number");
 	        } else if (userNumber == randomNum) {
 	        	System.out.println("Your number equals app number!");
-	        	isMatch = false;
+	        	isMatch = true;
 	        }
 	    }
 	}

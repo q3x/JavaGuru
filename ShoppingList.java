@@ -8,21 +8,21 @@ public class ShoppingList {
     public static final String ENTER_ITEM = "Enter item to add: ";
     public static final String DELETE = "Enter item to delete: ";
 
-    static String list[] = new String[0];
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        String list[] = new String[0];
         boolean exit = false;
 
         while (!exit) {
             showMenu();
             int choice = scanner.nextInt();
             if (choice == 1)
-                addItem();
+                list = addItem(list);
             else if (choice == 2)
-                listItems();
+                listItems(list);
             else if (choice == 3)
-                deleteItem();
+                list = deleteItem(list);
             else if (choice == 4) {
                 System.out.println("Good buy!");
                 exit = true;
@@ -32,10 +32,10 @@ public class ShoppingList {
     }
 
 
-    private static void deleteItem() {
+    private static String[] deleteItem(String[] list) {
         if (list.length != 0) {
             System.out.println(DELETE);
-            listItems();
+            listItems(list);
             int itemToDelete = scanner.nextInt() - 1;
 
             if (list.length == 0) {
@@ -47,18 +47,19 @@ public class ShoppingList {
                 list[itemToDelete] = list[arraySize];
                 list[arraySize] = null;
 
-
                 for (int i = 0; i < arraySize; i++) {
                     tempList[i] = list[i];
                 }
                 list = tempList;
+
             }
         } else
             System.out.println("List is empty!");
+        return list;
     }
 
 
-    private static void listItems() {
+    private static void listItems(String[] list) {
         if (list.length != 0) {
             for (int i = 0; i < list.length; i++)
                 System.out.println("(" + (i + 1) + ") " + list[i]);
@@ -68,7 +69,7 @@ public class ShoppingList {
     }
 
 
-    public static void addItem() {
+    public static String[] addItem(String[] list) {
         System.out.print(ENTER_ITEM);
         String item = scanner.next();
 
@@ -83,6 +84,7 @@ public class ShoppingList {
         }
         list = tempList;
         System.out.println(item + " was added!");
+        return list;
     }
 
 

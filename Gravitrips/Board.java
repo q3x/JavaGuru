@@ -1,13 +1,13 @@
 public class Board {
     private static final int ROW = 6;
     private static final int COLUMN = 7;
-    private static final Symbol EMPTY = Symbol.EMPTY;
+    private static final int DEFAULT_COUNTER_VALUE = 1;
     private Symbol[][] gameField = new Symbol[ROW][COLUMN];
 
     public Board() {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COLUMN; j++) {
-                gameField[i][j] = EMPTY;
+                gameField[i][j] = Symbol.EMPTY;
             }
         }
     }
@@ -25,12 +25,11 @@ public class Board {
 
     public boolean makeMove(int playerMove, Symbol symbol) {
         for (int i = ROW - 1; i >= 0; i--) {
-            if (gameField[i][playerMove] == EMPTY) {
+            if (gameField[i][playerMove] == Symbol.EMPTY) {
                 gameField[i][playerMove] = symbol;
                 return true;
             }
         }
-        System.out.println("Column is full, try another column!");
         return false;
     }
 
@@ -38,35 +37,29 @@ public class Board {
         int rowPosition = 0;
 
         for (int i = 0; i < ROW; i++) {
-            if (gameField[i][playerMove] != EMPTY) {
+            if (gameField[i][playerMove] != Symbol.EMPTY) {
                 rowPosition = i;
                 break;
             }
         }
 
-            if (checkVertical(playerMove, symbol, rowPosition))
-                return true;
-            if (checkHorizontalLeft(playerMove, symbol, rowPosition))
-                return true;
-            if (checkHorizontalRight(playerMove, symbol, rowPosition))
-                return true;
-            if (checkMajorDiagonalUp(playerMove, symbol, rowPosition))
-                return true;
-            if (checkMajorDiagonalDown(playerMove, symbol, rowPosition))
-                return true;
-            if (checkMinorDiagonalDown(playerMove, symbol, rowPosition))
-                return true;
-            if (checkMinorDiagonalUp(playerMove, symbol, rowPosition))
-                return true;
-
+        if ((checkVertical(playerMove, symbol, rowPosition)) ||
+                (checkHorizontalLeft(playerMove, symbol, rowPosition)) ||
+                (checkHorizontalRight(playerMove, symbol, rowPosition)) ||
+                (checkMajorDiagonalUp(playerMove, symbol, rowPosition)) ||
+                (checkMajorDiagonalDown(playerMove, symbol, rowPosition)) ||
+                (checkMinorDiagonalDown(playerMove, symbol, rowPosition)) ||
+                (checkMinorDiagonalUp(playerMove, symbol, rowPosition))) {
+            return true;
+        }
         return false;
     }
 
     private boolean checkMinorDiagonalDown(int playerMove, Symbol symbol, int rowPosition) {
-        int counter = 1;
+        int counter = DEFAULT_COUNTER_VALUE;
 
         for (int i = rowPosition + 1, j = playerMove - 1; i < ROW && j >= 0; i++, j--) {
-            if (symbol == gameField[i][j]) {
+            if (gameField[i][j] == symbol) {
                 counter++;
             } else {
                 break;
@@ -81,7 +74,7 @@ public class Board {
     }
 
     private boolean checkMinorDiagonalUp(int playerMove, Symbol symbol, int rowPosition) {
-        int counter = 1;
+        int counter = DEFAULT_COUNTER_VALUE;
 
         for (int i = rowPosition - 1, j = playerMove + 1; i >= 0 && j < COLUMN; i--, j++) {
             if (gameField[i][j] == symbol) {
@@ -99,7 +92,7 @@ public class Board {
     }
 
     private boolean checkMajorDiagonalUp(int playerMove, Symbol symbol, int rowPosition) {
-        int counter = 1;
+        int counter = DEFAULT_COUNTER_VALUE;
 
         for (int i = rowPosition - 1, j = playerMove - 1; i >= 0 && j >= 0; i--, j--) {
             if (gameField[i][j] == symbol) {
@@ -117,7 +110,7 @@ public class Board {
     }
 
     private boolean checkMajorDiagonalDown(int playerMove, Symbol symbol, int rowPosition) {
-        int counter = 1;
+        int counter = DEFAULT_COUNTER_VALUE;
 
         for (int i = rowPosition + 1, j = playerMove + 1; i < ROW && j < COLUMN; i++, j++) {
             if (gameField[i][j] == symbol) {
@@ -135,7 +128,7 @@ public class Board {
     }
 
     private boolean checkHorizontalLeft(int playerMove, Symbol symbol, int rowPosition) {
-        int counter = 1;
+        int counter = DEFAULT_COUNTER_VALUE;
 
         for (int i = playerMove - 1; i >= 0; i--) {
             if (gameField[rowPosition][i] == symbol) {
@@ -153,7 +146,7 @@ public class Board {
     }
 
     private boolean checkHorizontalRight(int playerMove, Symbol symbol, int rowPosition) {
-        int counter = 1;
+        int counter = DEFAULT_COUNTER_VALUE;
 
         for (int i = playerMove + 1; i < COLUMN; i++) {
             if (gameField[rowPosition][i] == symbol) {
@@ -171,7 +164,7 @@ public class Board {
     }
 
     private boolean checkVertical(int playerMove, Symbol symbol, int rowPosition) {
-        int counter = 1;
+        int counter = DEFAULT_COUNTER_VALUE;
 
         if ((rowPosition + 4) <= ROW) {
             for (int i = rowPosition + 1; i <= (rowPosition + 3); i++) {
@@ -184,7 +177,6 @@ public class Board {
         }
 
         if (counter == 4) {
-            System.out.println("COUNTER: " + counter);
             return true;
         }
 

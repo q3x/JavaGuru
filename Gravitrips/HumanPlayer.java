@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class HumanPlayer extends Player {
+    public HumanPlayer(String name, Symbol symbol) {
+        super(name, symbol);
+    }
+
     @Override
     int move() {
         System.out.println("Your turn, " + getName() + "!");

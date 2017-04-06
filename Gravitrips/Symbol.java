@@ -1,5 +1,5 @@
 public enum Symbol {
-    X ("X"), O ("O"), EMPTY (".");
+    X("X"), O("O"), EMPTY(".");
 
     private String symbol;
 
